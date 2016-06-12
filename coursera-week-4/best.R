@@ -23,7 +23,9 @@ best <- function(state, outcome) {
     message(paste("Looking for the best hospital in ", state, " for ",
                   outcome, "..."))
   
-  df <- outcome_list[outcome_list$State == state,]
+  df <- outcome_list[outcome_list$State == state,] # get info relative to state
+  df <- df[order(df[,2]),] # Order hospital by names
+  
   if (outcome == "heart attack")
     df[which.min(df[, ATTACK]), NAME]
   else if (outcome == "heart failure")
